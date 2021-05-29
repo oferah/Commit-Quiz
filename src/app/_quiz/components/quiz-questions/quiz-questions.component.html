@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="question" *ngIf="this.questions">
+        <div class="row question-content">
+
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                <p>{{this.currentQuestion.questionContent}}</p>
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+        </div>
+        <div class="row options" *ngFor="let option of this.currentQuestion.options">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+                <input type="radio" name="option{{this.currentQuestion.questionId}}"
+                    (click)="optionSelected(this.currentQuestion.questionId, option.optionId)"
+                    [checked]="this.answers[this.currentQuestion.questionId] === option.optionId">
+                {{option.optionContent}}
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+        </div>
+        <div class="row question-button">
+            <div class="col-md-3">&nbsp;</div>
+            <div class="col-md-6">
+
+                <input type="button" value="prev" class="btn btn-lg btn-default" style="margin-right: 30px;"
+                    [disabled]="this.currentQuestion.questionId === firstQuestionId" (click)="gotoPreviousQuestion()">
+                <input type="button" value="next" class="btn btn-lg btn-default"
+                    *ngIf="this.currentQuestion.questionId !== lastQuestionId" (click)="gotoNextQuestion()">
+                <input type="button" value="submit" class="btn btn-lg btn-default"
+                    *ngIf="this.currentQuestion.questionId === lastQuestionId" (click)="submitQuiz()">
+            </div>
+            <div class="col-md-3">&nbsp;</div>
+
+        </div>
+
+    </div>
+
+</div>
